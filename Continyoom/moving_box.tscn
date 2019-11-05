@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://the_box.gd" type="Script" id=1]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 0.470588, 0.372549, 0.372549, 1 )
+
+[node name="moving_box" type="Spatial"]
+
+[node name="the_box" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0 )
+width = 0.25
+height = 0.25
+depth = 0.25
+material = SubResource( 1 )
+script = ExtResource( 1 )
