@@ -1,5 +1,7 @@
 extends CSGBox
 
+var history
+
 var initial_transform
 var velocity = Vector3(0, 0, 0)
 var rotation_velocity = 0
@@ -15,14 +17,12 @@ const GRAVITY = -.25
 
 func _ready():
 	initial_transform = get_global_transform()
+	reset()
 	pass
 
 func _physics_process(delta):
 	if Input.is_key_pressed(KEY_R):
-		set_global_transform(initial_transform)
-		velocity = Vector3(0, 0, 0)
-		rotation_velocity = 0
-		falling_velocity = 0
+		reset()
 	if Input.is_action_pressed("ui_up"):
 		velocity.z -= MOVE_SPEED
 	if Input.is_action_pressed("ui_down"):
@@ -39,6 +39,10 @@ func _physics_process(delta):
 		rotation_velocity += ROTATION_SPEED
 	if Input.is_key_pressed(KEY_D):
 		rotation_velocity -= ROTATION_SPEED
+	if Input.is_key_pressed(KEY_S):
+		step_back(delta)
+	else:
+		stash_state(delta)
 	
 	velocity *= MOVE_FRICTION
 	rotation_velocity *= ROTATION_FRICTION
@@ -64,3 +68,53 @@ func _physics_process(delta):
 
 func _process(delta):
 	pass
+
+func reset():
+	set_global_transform(initial_transform)
+	velocity = Vector3(0, 0, 0)
+	rotation_velocity = 0
+	falling_velocity = 0
+	history = Array()
+
+func stash_state(var delta):
+	history.push_back(get_state_as_dictionary(delta))
+
+func step_back(var delta):
+	#while delta > history.back().delta:
+	#	delta -= history.pop_back().delta
+	set_state_from_dictionary(history.pop_back())
+	#set_state_from_dictionary(interpolate_states(history.get(-2), history.get(-1), delta))
+
+func get_state_as_dictionary(var delta):
+	var state = Dictionary()
+	state["transform"] = get_global_transform()
+	state["velocity"] = velocity
+	state["rotation_velocity"] = rotation_velocity
+	state["falling_velocity"] = falling_velocity
+	state["delta"] = delta
+	return state
+
+func set_state_from_dictionary(var state):
+	set_global_transform(state.transform)
+	velocity = state.velocity
+	rotation_velocity = state.rotation_velocity
+	falling_velocity = state.falling_velocity
+
+func interpolate_states(var later_state, var earlier_state, var delta):
+	var state = Dictionary()
+	var lerp_amount = 1 - delta / earlier_state.delta
+	state["transform"] = lerp_transform(earlier_state.transform, later_state.transform, lerp_amount)
+	state["velocity"] = lerp(earlier_state.velocity, later_state.velocity, lerp_amount)
+	state["rotation_velocity"] = lerp(earlier_state.rotation_velocity, later_state.rotation_velocity, lerp_amount)
+	state["falling_velocity"] = lerp(earlier_state.falling_velocity, later_state.falling_velocity, lerp_amount)
+	state["delta"] = null
+	return state
+
+func lerp_transform(var earlier_transform, var later_transform, var lerp_amount):
+	var orientation = earlier_transform.basis
+	var new_orientation = later_transform.basis
+	var updated_orientation_x = orientation.x * (1 - lerp_amount) + new_orientation.x * lerp_amount
+	var updated_orientation_y = orientation.y * (1 - lerp_amount) + new_orientation.y * lerp_amount
+	var updated_orientation_z = orientation.z * (1 - lerp_amount) + new_orientation.z * lerp_amount
+	var updated_origin = lerp(earlier_transform.origin, later_transform.origin, lerp_amount)
+	return Transform(updated_orientation_x, updated_orientation_y, updated_orientation_z, updated_origin)
