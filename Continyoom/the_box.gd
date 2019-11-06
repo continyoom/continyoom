@@ -1,6 +1,7 @@
 extends CSGBox
 
 var history
+var latest_state
 
 var initial_transform
 var velocity = Vector3(0, 0, 0)
@@ -14,6 +15,7 @@ const HEIGHT_ABOVE_GROUND = .125
 const SEARCH_LOW = .5
 const SEARCH_HIGH = .5
 const GRAVITY = -.25
+const REVERSE_SPEED = 1
 
 func _ready():
 	initial_transform = get_global_transform()
@@ -40,7 +42,7 @@ func _physics_process(delta):
 	if Input.is_key_pressed(KEY_D):
 		rotation_velocity -= ROTATION_SPEED
 	if Input.is_key_pressed(KEY_S):
-		step_back(delta)
+		step_back(delta * REVERSE_SPEED)
 	else:
 		stash_state(delta)
 	
@@ -77,13 +79,17 @@ func reset():
 	history = Array()
 
 func stash_state(var delta):
-	history.push_back(get_state_as_dictionary(delta))
+	latest_state = get_state_as_dictionary(delta)
+	history.push_back(latest_state)
 
 func step_back(var delta):
-	#while delta > history.back().delta:
-	#	delta -= history.pop_back().delta
-	set_state_from_dictionary(history.pop_back())
-	#set_state_from_dictionary(interpolate_states(history.get(-2), history.get(-1), delta))
+	while history.size() > 0 and delta >= history.back().remaining_delta:
+		latest_state = history.pop_back()
+		delta -= latest_state.remaining_delta
+	if history.size() == 0:
+		return
+	history.back().remaining_delta -= delta
+	set_state_from_dictionary(interpolate_states(history.back(), latest_state, history.back().remaining_delta))
 
 func get_state_as_dictionary(var delta):
 	var state = Dictionary()
@@ -92,6 +98,7 @@ func get_state_as_dictionary(var delta):
 	state["rotation_velocity"] = rotation_velocity
 	state["falling_velocity"] = falling_velocity
 	state["delta"] = delta
+	state["remaining_delta"] = delta
 	return state
 
 func set_state_from_dictionary(var state):
@@ -103,11 +110,13 @@ func set_state_from_dictionary(var state):
 func interpolate_states(var later_state, var earlier_state, var delta):
 	var state = Dictionary()
 	var lerp_amount = 1 - delta / earlier_state.delta
+
 	state["transform"] = lerp_transform(earlier_state.transform, later_state.transform, lerp_amount)
 	state["velocity"] = lerp(earlier_state.velocity, later_state.velocity, lerp_amount)
 	state["rotation_velocity"] = lerp(earlier_state.rotation_velocity, later_state.rotation_velocity, lerp_amount)
 	state["falling_velocity"] = lerp(earlier_state.falling_velocity, later_state.falling_velocity, lerp_amount)
 	state["delta"] = null
+	state["remaining_delta"] = null
 	return state
 
 func lerp_transform(var earlier_transform, var later_transform, var lerp_amount):
