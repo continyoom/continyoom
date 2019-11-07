@@ -22,7 +22,6 @@ func _process(delta):
 		
 		#switch pause state
 		get_tree().paused = not get_tree().paused
-		print(get_tree().paused)
 
 #signal from resume button
 func _on_resume_pressed():
