@@ -7,15 +7,20 @@ var initial_transform
 var velocity = Vector3(0, 0, 0)
 var rotation_velocity = 0
 var falling_velocity = 0
-const MOVE_SPEED = 1
-const MOVE_FRICTION = .9
-const ROTATION_SPEED = .005
-const ROTATION_FRICTION = .85
+
+var timescale = KEY_TIMESCALE
+
+const MOVE_SPEED = 200
+const MOVE_FRICTION = 20
+const ROTATION_SPEED = 60
+const ROTATION_FRICTION = 30
 const HEIGHT_ABOVE_GROUND = .125
 const SEARCH_LOW = .5
 const SEARCH_HIGH = .5
-const GRAVITY = -.25
+const GRAVITY = -20
 const REVERSE_SPEED = 1
+const KEY_TIMESCALE = 1
+const MAX_TIMESCALE = 2
 
 func _ready():
 	initial_transform = get_global_transform()
@@ -23,33 +28,60 @@ func _ready():
 	pass
 
 func _physics_process(delta):
+	
 	if Input.is_key_pressed(KEY_R):
 		reset()
-	if Input.is_action_pressed("ui_up"):
-		velocity.z -= MOVE_SPEED
-	if Input.is_action_pressed("ui_down"):
-		velocity.z += MOVE_SPEED
-	if Input.is_action_pressed("ui_left"):
-		velocity.x -= MOVE_SPEED
-	if Input.is_action_pressed("ui_right"):
-		velocity.x += MOVE_SPEED
-	if Input.is_action_pressed("ui_page_up"):
-		velocity.y += MOVE_SPEED
-	if Input.is_action_pressed("ui_page_down"):
-		velocity.y -= MOVE_SPEED
-	if Input.is_key_pressed(KEY_A):
-		rotation_velocity += ROTATION_SPEED
-	if Input.is_key_pressed(KEY_D):
-		rotation_velocity -= ROTATION_SPEED
+	
 	if Input.is_key_pressed(KEY_S):
-		step_back(delta * REVERSE_SPEED)
+		timescale = -KEY_TIMESCALE
+	elif Input.is_key_pressed(KEY_W):
+		timescale = MAX_TIMESCALE
+	else:
+		timescale = KEY_TIMESCALE
+	
+	delta *= timescale
+	
+	if timescale < 0:
+		step_back(delta * -1)
 	else:
 		stash_state(delta)
-	
-	velocity *= MOVE_FRICTION
-	rotation_velocity *= ROTATION_FRICTION
-	translate(velocity * delta)
-	rotate_object_local(Vector3(0, 1, 0), rotation_velocity)
+		
+		var zvels = 1
+		var xvels = 1
+		var rvels = 1
+		if abs(velocity.z) > 1:
+			zvels = abs(velocity.z)
+		if abs(velocity.x) > 1:
+			xvels = abs(velocity.x)
+		if abs(rotation_velocity) > 1:
+			rvels = abs(rotation_velocity)
+		if Input.is_action_pressed("ui_up"):
+			velocity.z -= MOVE_SPEED * delta / zvels
+		if Input.is_action_pressed("ui_down"):
+			velocity.z += MOVE_SPEED * delta / zvels
+		if Input.is_action_pressed("ui_left"):
+			velocity.x -= MOVE_SPEED * delta / xvels
+		if Input.is_action_pressed("ui_right"):
+			velocity.x += MOVE_SPEED * delta / xvels
+		if Input.is_action_pressed("ui_page_up"):
+			velocity.y += MOVE_SPEED * delta
+		if Input.is_action_pressed("ui_page_down"):
+			velocity.y -= MOVE_SPEED * delta
+		if Input.is_key_pressed(KEY_A):
+			rotation_velocity += ROTATION_SPEED * delta / rvels
+		if Input.is_key_pressed(KEY_D):
+			rotation_velocity -= ROTATION_SPEED * delta / rvels
+		velocity.x -= MOVE_FRICTION * sign(velocity.x) * delta
+		velocity.z -= MOVE_FRICTION * sign(velocity.z) * delta
+		rotation_velocity -= ROTATION_FRICTION * sign(rotation_velocity) * delta
+		if abs(velocity.x) < abs(MOVE_FRICTION * sign(velocity.x) * delta) * 1.5:
+			velocity.x = 0
+		if abs(velocity.z) < abs(MOVE_FRICTION * sign(velocity.z) * delta) * 1.5:
+			velocity.z = 0
+		if abs(rotation_velocity) < abs(ROTATION_FRICTION * sign(rotation_velocity) * delta) * .5:
+			rotation_velocity = 0
+		translate(velocity * delta)
+		rotate_object_local(Vector3(0, 1, 0), rotation_velocity * delta)
 	
 	var gt = get_global_transform()
 	var space_state = get_world().get_direct_space_state()
@@ -66,7 +98,7 @@ func _physics_process(delta):
 		falling_velocity = 0
 	else:
 		falling_velocity += GRAVITY * delta
-		translate(Vector3(0, falling_velocity, 0))
+		translate(Vector3(0, falling_velocity * delta, 0))
 
 func _process(delta):
 	pass
