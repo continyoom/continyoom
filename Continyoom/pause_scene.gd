@@ -26,3 +26,7 @@ func _process(delta):
 #signal from resume button
 func _on_resume_pressed():
 	Input.action_press("pause")
+
+#signal from quit button
+func _on_quit_pressed():
+	get_tree().quit()
