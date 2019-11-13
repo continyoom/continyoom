@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/tests.dae-f49bcd28ea95575a8b69d414da2e1182.scn"
+path="res://.import/tests.dae-abd88b53244df87f25bf517e85a28c55.scn"
 
 [deps]
 
-source_file="res://test tracks/tests.dae"
-dest_files=[ "res://.import/tests.dae-f49bcd28ea95575a8b69d414da2e1182.scn" ]
+source_file="res://test_tracks/tests.dae"
+dest_files=[ "res://.import/tests.dae-abd88b53244df87f25bf517e85a28c55.scn" ]
 
 [params]
 
