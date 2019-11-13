@@ -14,7 +14,7 @@ transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107,
 transform = Transform( -0.136546, 0.464586, -0.874937, 0, 0.88321, 0.468978, 0.990634, 0.0640369, -0.120598, -39.87, 25.31, 4.976 )
 script = ExtResource( 2 )
 
-[node name="Scene Root" parent="." instance=ExtResource( 3 )]
+[node name="ds_rainbow_road" parent="." instance=ExtResource( 3 )]
 
 [node name="pause scene" parent="." instance=ExtResource( 4 )]
 visible = false

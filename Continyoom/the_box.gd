@@ -21,6 +21,8 @@ const GRAVITY = -20
 const REVERSE_SPEED = 1
 const KEY_TIMESCALE = 1
 const MAX_TIMESCALE = 2
+const BOOP_DISTANCE = .125
+const BOOP_VELOCITY = 2
 
 func _ready():
 	initial_transform = get_global_transform()
@@ -85,7 +87,33 @@ func _physics_process(delta):
 	
 	var gt = get_global_transform()
 	var space_state = get_world().get_direct_space_state()
+	
+	#var right_hit = space_state.intersect_ray(gt.origin - gt.basis.x * BOOP_DISTANCE * 4, gt.basis.x * BOOP_DISTANCE + gt.origin, [], 0x00000004)
+	#var left_hit = space_state.intersect_ray(gt.origin + gt.basis.x * BOOP_DISTANCE * 4, -gt.basis.x * BOOP_DISTANCE + gt.origin, [], 0x00000004)
+	#var front_hit = space_state.intersect_ray(gt.origin + gt.basis.z * BOOP_DISTANCE * 4, -gt.basis.z * BOOP_DISTANCE + gt.origin, [], 0x00000004)
+	#var back_hit = space_state.intersect_ray(gt.origin - gt.basis.z * BOOP_DISTANCE * 4, gt.basis.z * BOOP_DISTANCE + gt.origin, [], 0x00000004)
+	var right_hit = space_state.intersect_ray(gt.origin, gt.basis.x * BOOP_DISTANCE + gt.origin, [], 0x00000004)
+	var left_hit = space_state.intersect_ray(gt.origin, -gt.basis.x * BOOP_DISTANCE + gt.origin, [], 0x00000004)
+	var front_hit = space_state.intersect_ray(gt.origin, -gt.basis.z * BOOP_DISTANCE + gt.origin, [], 0x00000004)
+	var back_hit = space_state.intersect_ray(gt.origin, gt.basis.z * BOOP_DISTANCE + gt.origin, [], 0x00000004)
+	
+	if left_hit:
+		translate(Vector3(BOOP_DISTANCE - left_hit.position.distance_to(gt.origin), 0, 0))
+		velocity.x = 0
+	if right_hit:
+		translate(-Vector3(BOOP_DISTANCE - right_hit.position.distance_to(gt.origin), 0, 0))
+		velocity.x = 0
+	if front_hit:
+		translate(Vector3(0, 0, BOOP_DISTANCE - front_hit.position.distance_to(gt.origin)))
+		velocity.z = 0
+	if back_hit:
+		translate(-Vector3(0, 0, BOOP_DISTANCE - back_hit.position.distance_to(gt.origin)))
+	
+	gt = get_global_transform()
+	
+	space_state = get_world().get_direct_space_state()
 	var hit = space_state.intersect_ray(gt.basis.y * SEARCH_LOW + gt.origin, gt.basis.y * -SEARCH_HIGH + gt.origin, [], 0x00000002)
+	
 	
 	if hit:
 		set_as_toplevel(true)
