@@ -85,7 +85,7 @@ func _physics_process(delta):
 	
 	var gt = get_global_transform()
 	var space_state = get_world().get_direct_space_state()
-	var hit = space_state.intersect_ray(gt.basis.y * SEARCH_LOW + gt.origin, gt.basis.y * -SEARCH_HIGH + gt.origin)
+	var hit = space_state.intersect_ray(gt.basis.y * SEARCH_LOW + gt.origin, gt.basis.y * -SEARCH_HIGH + gt.origin, [], 0x00000002)
 	
 	if hit:
 		set_as_toplevel(true)
