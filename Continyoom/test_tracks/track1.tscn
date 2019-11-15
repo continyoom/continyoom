@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://moving_box.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Camera.gd" type="Script" id=2]
+[ext_resource path="res://pause_scene.tscn" type="PackedScene" id=3]
+[ext_resource path="res://test_tracks/just_track1_new.tscn" type="PackedScene" id=4]
+
+[node name="root" type="Spatial"]
+
+[node name="moving_box" parent="." instance=ExtResource( 1 )]
+transform = Transform( -0.00690001, 0, -0.999976, 0, 1, 0, 0.999976, 0, -0.00690001, -0.769606, 0.704309, -0.0627646 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 0.598417, 0.375738, -0.707614, 0, 0.88321, 0.468978, 0.801185, -0.280645, 0.528528, -14.2924, 11.0518, 3.89016 )
+script = ExtResource( 2 )
+
+[node name="pause scene" parent="." instance=ExtResource( 3 )]
+visible = false
+
+[node name="Scene Root" parent="." instance=ExtResource( 4 )]
