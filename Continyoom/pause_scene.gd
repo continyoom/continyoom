@@ -30,7 +30,7 @@ func _on_resume_pressed():
 #signal from menu button
 func _on_menu_pressed():
 	get_tree().paused = false
-	get_tree().change_scene("menu_scene.tscn")
+	get_tree().change_scene("scenes/menu_scene.tscn")
 
 #signal from quit button
 func _on_quit_pressed():
