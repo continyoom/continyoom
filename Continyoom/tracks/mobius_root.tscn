@@ -8,6 +8,7 @@ data = PoolVector3Array( 0, -0.3991, 1.6002, 2.011, -0.3896, 1.6011, 2.0009, -0.
 [node name="mobius_root" index="0" instance=ExtResource( 1 )]
 
 [node name="StaticBody" type="StaticBody" parent="NurbsPath001" index="0"]
+collision_layer = 2
 
 [node name="CollisionShape" type="CollisionShape" parent="NurbsPath001/StaticBody" index="0"]
 shape = SubResource( 1 )
