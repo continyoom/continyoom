@@ -12,10 +12,12 @@ func _physics_process(delta):
 	var box_z_axis = box_transform.basis.z
 	var box_position = box_transform.origin
 	
-	var target_position = box_position + box_y_axis * 1 - box_z_axis * -2
+	var target_position = box_position + box_y_axis * .5 - box_z_axis * -2
 	
 	var orientation = get_global_transform().basis
 	look_at(box_position, box_y_axis)
+	#rotate_z(.5)
+	global_rotate(get_global_transform().basis.x, .3)
 	var new_orientation = get_global_transform().basis
 	
 	var rotation_lerp_amount = 10
