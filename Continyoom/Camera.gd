@@ -12,12 +12,12 @@ func _physics_process(delta):
 	var box_z_axis = box_transform.basis.z
 	var box_position = box_transform.origin
 	
-	var target_position = box_position + box_y_axis * .5 - box_z_axis * -2
+	var target_position = box_position + box_y_axis * .375 - box_z_axis * -.75
 	
 	var orientation = get_global_transform().basis
 	look_at(box_position, box_y_axis)
 	#rotate_z(.5)
-	global_rotate(get_global_transform().basis.x, .3)
+	global_rotate(get_global_transform().basis.x, .2)
 	var new_orientation = get_global_transform().basis
 	
 	var rotation_lerp_amount = 10
@@ -26,7 +26,7 @@ func _physics_process(delta):
 	var updated_orientation_z = orientation.z * (1 - rotation_lerp_amount * delta) + new_orientation.z * rotation_lerp_amount * delta
 	set_global_transform(Transform(updated_orientation_x, updated_orientation_y, updated_orientation_z, get_global_transform().origin))
 	
-	var translation_lerp_amount = 4
+	var translation_lerp_amount = 6
 	current_position = current_position * (1 - translation_lerp_amount * delta) + target_position * translation_lerp_amount * delta
 	set_translation(current_position)
 
