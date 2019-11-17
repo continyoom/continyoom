@@ -19,7 +19,6 @@ func _physics_process(delta):
 	# TODO: unbreak this when using timescale
 	if (delta < 0):
 		step_back(-delta)
-		print("foo")
 	else:
 		stash_state(delta)
 		var the_box = get_parent().get_node("moving_box/the_box")
@@ -30,8 +29,6 @@ func _physics_process(delta):
 		var box_position = box_transform.origin
 		
 		var target_position = box_position + box_y_axis * .375 - box_z_axis * -.75
-		
-		print(target_position)
 		
 		var orientation = get_global_transform().basis
 		look_at(box_position, box_y_axis)
