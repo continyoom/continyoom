@@ -1,5 +1,7 @@
 extends CSGBox
 
+signal timescale_update(new_timescale)
+
 var history
 var latest_state
 
@@ -120,6 +122,8 @@ func _physics_process(delta):
 	else:
 		falling_velocity += GRAVITY * delta
 		translate(Vector3(0, falling_velocity * delta, 0))
+	
+	emit_signal("timescale_update", timescale)
 
 func _process(delta):
 	pass
