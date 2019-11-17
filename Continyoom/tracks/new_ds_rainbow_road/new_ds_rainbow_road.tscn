@@ -34,7 +34,10 @@ tracks/0/keys = {
 "values": [ Vector3( 0, 0, 0 ), Vector3( -1, 0, 0 ) ]
 }
 
-[node name="new_ds_rainbow_road" index="0" instance=ExtResource( 1 )]
+[node name="new_ds_rainbow_road" instance=ExtResource( 1 )]
+
+[node name="arrows" parent="." index="2"]
+editor/display_folded = true
 
 [node name="StaticBody" type="StaticBody" parent="arrows" index="0"]
 collision_layer = 4
