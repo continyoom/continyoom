@@ -1,16 +1,12 @@
 extends Control
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _physics_process(delta):
+	var view = get_viewport_rect().size
+	$title.rect_position = Vector2(view.x / 2 - $title.rect_size.x / 2, 50)
+	$wide_car.global_position = Vector2(view.x / 2, view.y / 2)
+	var img_scale = max($wide_car.global_position.x / 250, $wide_car.global_position.y / 150)
+	$wide_car.global_scale = Vector2(img_scale, img_scale)
+	$play.rect_position = Vector2(view.x / 2 - $play.rect_size.x / 2, view.y - 150)
 
 
 func _on_Button_pressed():

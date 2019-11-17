@@ -22,14 +22,6 @@ margin_bottom = 265.0
 custom_fonts/font = ExtResource( 2 )
 text = "Resume"
 
-[node name="quit" type="Button" parent="."]
-margin_left = 422.0
-margin_top = 400.0
-margin_right = 602.0
-margin_bottom = 465.0
-custom_fonts/font = SubResource( 1 )
-text = "Quit"
-
 [node name="menu" type="Button" parent="."]
 margin_left = 422.0
 margin_top = 300.0
@@ -37,6 +29,14 @@ margin_right = 602.0
 margin_bottom = 365.0
 custom_fonts/font = ExtResource( 2 )
 text = "Menu"
+
+[node name="quit" type="Button" parent="."]
+margin_left = 422.0
+margin_top = 400.0
+margin_right = 602.0
+margin_bottom = 465.0
+custom_fonts/font = SubResource( 1 )
+text = "Quit"
 [connection signal="pressed" from="resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="menu" to="." method="_on_menu_pressed"]
+[connection signal="pressed" from="quit" to="." method="_on_quit_pressed"]

@@ -1,14 +1,11 @@
 extends Control
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+func _physics_process(delta):
+	var view = get_viewport_rect().size
+	$resume.rect_position = Vector2(view.x / 2 - $resume.rect_size.x / 2, view.y / 2 - 100)
+	$menu.rect_position = Vector2(view.x / 2 - $menu.rect_size.x / 2, view.y / 2)
+	$quit.rect_position = Vector2(view.x / 2 - $quit.rect_size.x / 2, view.y / 2 + 100)
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_just_pressed("pause"):
 		#de presses action, only important when action is triggered in code
