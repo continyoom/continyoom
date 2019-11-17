@@ -14,4 +14,5 @@ func _ready():
 
 
 func _on_Button_pressed():
-	get_tree().change_scene("scenes/main_scene.tscn")
+	#get_tree().change_scene("scenes/main_scene.tscn")
+	get_tree().change_scene("scenes/play_ndsrr.tscn")
