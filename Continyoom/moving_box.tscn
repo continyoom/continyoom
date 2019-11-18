@@ -1,6 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://the_box.gd" type="Script" id=1]
+[ext_resource path="res://scripts/the_box.gd" type="Script" id=1]
+
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.470588, 0.372549, 0.372549, 1 )
