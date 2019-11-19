@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scripts/select_scene.gd" type="Script" id=1]
+[ext_resource path="res://fonts/Raleway-Regular.tres" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 80
+font_data = ExtResource( 2 )
+
+[node name="select_scene" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="label" type="Label" parent="."]
+margin_left = 277.0
+margin_top = 60.0
+margin_right = 747.0
+margin_bottom = 160.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Track Select"
+align = 1
+
+[node name="r_road" type="Button" parent="."]
+margin_left = 390.136
+margin_top = 290.38
+margin_right = 618.136
+margin_bottom = 369.38
+text = "Rainbow Road"
+[connection signal="pressed" from="r_road" to="." method="_on_r_road_pressed"]
