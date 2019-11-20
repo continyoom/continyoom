@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/kart_body.png-db9b44921de67d6c1b1a29e77b44120a.s3tc.stex"
-path.etc2="res://.import/kart_body.png-db9b44921de67d6c1b1a29e77b44120a.etc2.stex"
+path.s3tc="res://.import/kart_emblem.png-c0cd586f9aef14a7dfa37fed1055da9a.s3tc.stex"
+path.etc2="res://.import/kart_emblem.png-c0cd586f9aef14a7dfa37fed1055da9a.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://karts/kart_body.png"
-dest_files=[ "res://.import/kart_body.png-db9b44921de67d6c1b1a29e77b44120a.s3tc.stex", "res://.import/kart_body.png-db9b44921de67d6c1b1a29e77b44120a.etc2.stex" ]
+source_file="res://karts/kart-B/kart_emblem.png"
+dest_files=[ "res://.import/kart_emblem.png-c0cd586f9aef14a7dfa37fed1055da9a.s3tc.stex", "res://.import/kart_emblem.png-c0cd586f9aef14a7dfa37fed1055da9a.etc2.stex" ]
 
 [params]
 
