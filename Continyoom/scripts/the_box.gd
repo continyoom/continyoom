@@ -30,8 +30,9 @@ const SEARCH_LOW = .125
 const SEARCH_HIGH = .75
 const GRAVITY = -20
 const REVERSE_SPEED = 1
-const KEY_TIMESCALE = .5
-const MAX_TIMESCALE = 1
+const SLOW_TIMESCALE = .5
+const KEY_TIMESCALE = 1
+const MAX_TIMESCALE = 2
 const BOOP_DISTANCE = .375
 const BOOP_VELOCITY = 2
 
@@ -50,6 +51,8 @@ func _physics_process(delta):
 		timescale = -KEY_TIMESCALE
 	elif Input.is_key_pressed(KEY_W):
 		timescale = MAX_TIMESCALE
+	elif Input.is_key_pressed(KEY_N):
+		timescale = SLOW_TIMESCALE
 	else:
 		timescale = KEY_TIMESCALE
 	
@@ -60,7 +63,7 @@ func _physics_process(delta):
 	else:
 		stash_state(delta)
 		
-		if (Input.is_action_just_pressed("bounce")):
+		if (Input.is_action_just_pressed("bounce") && bounce == 0):
 			bounce()
 		if (!Input.is_action_pressed("bounce")):
 			drift = 0
@@ -255,7 +258,7 @@ func update_speed(var delta):
 	if (!Input.is_action_pressed("brake")):
 		result += 40 * delta
 	result *= .98
-	if (result < 20 * KEY_TIMESCALE):
+	if (result < 20 * timescale):
 		drift = 0
 	return result
 
@@ -264,10 +267,9 @@ func move(var delta, var speed):
 		rotate_object_local(Vector3(0, 1, 0), -steer * delta * 1)
 		velocity = Vector3(0, 0, -speed)
 	else:
-		rotate_object_local(Vector3(0, 1, 0), -(steer * .75 + drift) * delta * 2)
+		rotate_object_local(Vector3(0, 1, 0), -(steer * 1 + drift) * delta * 2)
 		velocity = Vector3(-cos(drift * .5 - PI * .5) * speed, 0, sin(drift * .5 - PI * .5) * speed)
 	translate(velocity * delta / 3)
-	print(velocity)
 
 func bounce():
 	bounce_vel = 1000
