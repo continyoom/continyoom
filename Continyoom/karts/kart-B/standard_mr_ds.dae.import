@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/standard_mr_ds.dae-8127140116d0276aa85939846bfbd78f.scn"
+path="res://.import/standard_mr_ds.dae-f119485f48851cef5bbbfafaf461d31c.scn"
 
 [deps]
 
-source_file="res://karts/standard_mr_ds.dae"
-dest_files=[ "res://.import/standard_mr_ds.dae-8127140116d0276aa85939846bfbd78f.scn" ]
+source_file="res://karts/kart-B/standard_mr_ds.dae"
+dest_files=[ "res://.import/standard_mr_ds.dae-f119485f48851cef5bbbfafaf461d31c.scn" ]
 
 [params]
 
