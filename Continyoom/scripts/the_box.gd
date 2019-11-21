@@ -216,6 +216,11 @@ func update_steer(var delta):
 	steer = clamp(steer, -1, 1)
 
 func update_drift(var delta):
+	if (drift == 0 && bounce > 0):
+		if (Input.is_action_pressed("steer_left")):
+			drift = -1
+		if (Input.is_action_pressed("steer_right")):
+			drift = 1
 	pass
 
 func update_speed(var delta):
