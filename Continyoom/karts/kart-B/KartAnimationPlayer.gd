@@ -1,7 +1,7 @@
 extends AnimationPlayer
 
 func _ready():
-	var the_box = get_parent().get_parent().get_parent().get_parent().get_node("moving_box/the_box")
+	var the_box = get_node("../../the_box")
 #	print(get_parent().get_parent().get_parent().get_children())
 	if (the_box != null):
 		the_box.connect("timescale_update", self, "_on_timescale_update")

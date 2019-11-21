@@ -12,7 +12,7 @@ var bounce_vel = 0
 var current_drift = 0
 
 const STEER_SPEED = 8
-const DRIFT_SPEED = 4
+const DRIFT_SPEED = 3
 const BOUNCE_DOWNSCALE = 200
 
 var initial_transform
@@ -251,14 +251,14 @@ func move(var delta, var speed):
 	var steer_rotate = -steer * delta * 1
 	var drift_rotate = -(steer * .5 + drift * .75) * delta * 2
 	var steer_velocity = Vector3(0, 0, -speed)
-	var drift_velocity = Vector3(-cos(current_drift * .5 - PI * .5) * speed, 0, sin(current_drift * .5 - PI * .5) * speed)
+	var drift_velocity = Vector3(-cos(current_drift * .75 - PI * .5) * speed, 0, sin(current_drift * .75 - PI * .5) * speed)
 	
 	var rotate = lerp(steer_rotate, drift_rotate, abs(current_drift))
 	velocity = lerp(steer_velocity, drift_velocity, abs(current_drift))
 	
 	rotate_object_local(Vector3(0, 1, 0), rotate)
 	translate(velocity * delta / 3)
-	print(current_drift)
+	#print(current_drift)
 	#print(velocity)
 	#print(get_global_transform().origin)
 
