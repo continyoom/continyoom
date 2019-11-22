@@ -37,6 +37,8 @@ const MAX_TIMESCALE = 2
 const BOOP_DISTANCE = .375
 const BOOP_VELOCITY = 2
 
+var third_person = true
+
 func _ready():
 	initial_transform = get_global_transform()
 	reset()
@@ -81,6 +83,10 @@ func _physics_process(delta):
 	translate(Vector3(0, bounce / BOUNCE_DOWNSCALE, 0))
 	
 	emit_signal("timescale_update", timescale)
+	
+	if Input.is_action_just_pressed("view_switch"):
+		third_person = not third_person
+		
 
 func collide_walls(delta):
 	var gt = get_global_transform()
