@@ -1,6 +1,8 @@
 extends CSGBox
 
 signal timescale_update(new_timescale)
+signal begin_drift()
+signal end_drift()
 
 var history
 var latest_state
@@ -64,7 +66,7 @@ func _physics_process(delta):
 	else:
 		stash_state(delta)
 		
-		if (Input.is_action_just_pressed("bounce") && bounce == 0):
+		if (Input.is_action_just_pressed("bounce") && bounce == 0 && falling_velocity == 0):
 			bounce()
 		if (!Input.is_action_pressed("bounce")):
 			drift = 0
@@ -80,9 +82,11 @@ func _physics_process(delta):
 	
 	translate(Vector3(0, bounce / BOUNCE_DOWNSCALE, 0))
 	
-	print(current_drift)
-	
 	emit_signal("timescale_update", timescale)
+	if (bounce == 0 and drift != 0):
+		emit_signal("begin_drift")
+	if (drift == 0 or falling_velocity != 0):
+		emit_signal("end_drift")
 
 func collide_walls(delta):
 	var gt = get_global_transform()
