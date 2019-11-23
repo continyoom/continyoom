@@ -80,6 +80,8 @@ func _physics_process(delta):
 	
 	translate(Vector3(0, bounce / BOUNCE_DOWNSCALE, 0))
 	
+	print(current_drift)
+	
 	emit_signal("timescale_update", timescale)
 
 func collide_walls(delta):
@@ -166,6 +168,7 @@ func set_state_from_dictionary(var state):
 	drift = state.drift
 	bounce = state.bounce
 	bounce_vel = state.bounce_vel
+	current_drift = state.current_drift
 
 func interpolate_states(var later_state, var earlier_state, var delta):
 	var state = Dictionary()
