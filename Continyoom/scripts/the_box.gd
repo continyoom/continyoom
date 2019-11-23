@@ -120,6 +120,8 @@ func resolve_ground(delta):
 		set_translation(hit.position + get_global_transform().basis.y * HEIGHT_ABOVE_GROUND)
 		set_as_toplevel(false)
 		falling_velocity = 0
+		if (Input.is_action_pressed("bounce") && bounce == 0 && falling_velocity == 0 && drift == 0):
+			just_drift()
 	else:
 		falling_velocity += GRAVITY * delta
 		translate(Vector3(0, falling_velocity * delta, 0))
@@ -271,6 +273,9 @@ func move(var delta, var speed):
 
 func bounce():
 	bounce_vel = 500
+	just_drift()
+
+func just_drift():
 	if (Input.is_action_pressed("steer_left")):
 		drift = -1
 	if (Input.is_action_pressed("steer_right")):
