@@ -21,6 +21,7 @@ func _process(delta):
 
 func _on_timescale_update(var new_timescale):
 	set_speed_scale(abs(new_timescale * 1))
+	lifetime = .08 / lerp(1, abs(new_timescale), .3)
 
 func _on_begin_drift():
 	emitting = true

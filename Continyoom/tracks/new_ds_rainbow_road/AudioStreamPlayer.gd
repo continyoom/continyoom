@@ -43,7 +43,7 @@ func update_mute():
 	effect.set_band_gain_db(3, -40 * mute)
 	effect.set_band_gain_db(4, -40 * mute)
 	effect.set_band_gain_db(5, -40 * mute)
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), -3 * mute)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), -1 * mute)
 
 func complete_mute(var mute):
 	var bi = AudioServer.get_bus_index("Master")
