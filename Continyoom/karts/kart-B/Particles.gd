@@ -9,6 +9,7 @@ func _ready():
 		the_box.connect("begin_drift", self, "_on_begin_drift")
 		the_box.connect("end_drift", self, "_on_end_drift")
 	emitting = true
+	set_use_local_coordinates(false)
 
 func _process(delta):
 	if (init >= 1):
