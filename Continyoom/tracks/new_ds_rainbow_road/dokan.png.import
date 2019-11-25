@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/dokan.png-6b238b1946272ea6f496b434b22bd311.s3tc.stex"
 path.etc2="res://.import/dokan.png-6b238b1946272ea6f496b434b22bd311.etc2.stex"
+path.etc="res://.import/dokan.png-6b238b1946272ea6f496b434b22bd311.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://tracks/new_ds_rainbow_road/dokan.png"
-dest_files=[ "res://.import/dokan.png-6b238b1946272ea6f496b434b22bd311.s3tc.stex", "res://.import/dokan.png-6b238b1946272ea6f496b434b22bd311.etc2.stex" ]
+dest_files=[ "res://.import/dokan.png-6b238b1946272ea6f496b434b22bd311.s3tc.stex", "res://.import/dokan.png-6b238b1946272ea6f496b434b22bd311.etc2.stex", "res://.import/dokan.png-6b238b1946272ea6f496b434b22bd311.etc.stex" ]
 
 [params]
 

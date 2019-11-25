@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/donutplains-3.png-d162b200a09f6853f981ce73d1a0e595.s3tc.stex"
 path.etc2="res://.import/donutplains-3.png-d162b200a09f6853f981ce73d1a0e595.etc2.stex"
+path.etc="res://.import/donutplains-3.png-d162b200a09f6853f981ce73d1a0e595.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://test_tracks/donutplains-3.png"
-dest_files=[ "res://.import/donutplains-3.png-d162b200a09f6853f981ce73d1a0e595.s3tc.stex", "res://.import/donutplains-3.png-d162b200a09f6853f981ce73d1a0e595.etc2.stex" ]
+dest_files=[ "res://.import/donutplains-3.png-d162b200a09f6853f981ce73d1a0e595.s3tc.stex", "res://.import/donutplains-3.png-d162b200a09f6853f981ce73d1a0e595.etc2.stex", "res://.import/donutplains-3.png-d162b200a09f6853f981ce73d1a0e595.etc.stex" ]
 
 [params]
 

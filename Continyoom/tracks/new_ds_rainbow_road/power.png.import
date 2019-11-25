@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/power.png-70364ccaf8020e525243b5843707103d.s3tc.stex"
 path.etc2="res://.import/power.png-70364ccaf8020e525243b5843707103d.etc2.stex"
+path.etc="res://.import/power.png-70364ccaf8020e525243b5843707103d.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://tracks/new_ds_rainbow_road/power.png"
-dest_files=[ "res://.import/power.png-70364ccaf8020e525243b5843707103d.s3tc.stex", "res://.import/power.png-70364ccaf8020e525243b5843707103d.etc2.stex" ]
+dest_files=[ "res://.import/power.png-70364ccaf8020e525243b5843707103d.s3tc.stex", "res://.import/power.png-70364ccaf8020e525243b5843707103d.etc2.stex", "res://.import/power.png-70364ccaf8020e525243b5843707103d.etc.stex" ]
 
 [params]
 

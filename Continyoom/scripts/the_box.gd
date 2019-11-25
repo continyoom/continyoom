@@ -7,6 +7,11 @@ signal end_drift()
 var history
 var latest_state
 
+var touch_position = null
+var viewport_size = null
+var manual_bounce = false
+var touch_steer = 0
+
 var steer = 0
 var drift = 0
 var bounce = 0
@@ -40,11 +45,15 @@ const BOOP_DISTANCE = .375
 const BOOP_VELOCITY = 2
 
 func _ready():
+	viewport_size = get_node("../../pause scene").get("view")
 	initial_transform = get_global_transform()
 	reset()
 	pass
 
 func _physics_process(delta):
+#	print(Input.is_action_pressed("bounce"), touch_position)
+	viewport_size = get_node("../../pause scene").get("view")
+
 	translate(Vector3(0, -bounce / BOUNCE_DOWNSCALE, 0))
 	
 	if Input.is_key_pressed(KEY_R):
@@ -58,6 +67,17 @@ func _physics_process(delta):
 		timescale = SLOW_TIMESCALE
 	else:
 		timescale = KEY_TIMESCALE
+	
+	if (touch_position != null):
+		var scaled_y = 1 - (touch_position.y / viewport_size.y)
+		var scaled_x = touch_position.x / viewport_size.x
+		if (scaled_y < .8):
+			timescale = lerp(-1, 2, (scaled_y - .2) * 4)
+			timescale = clamp(timescale, -1, 2)
+			touch_steer = lerp(-2, 2, scaled_x)
+			touch_steer = clamp(touch_steer, -1, 1)
+	else:
+		touch_steer = 0
 	
 	delta *= timescale
 	
@@ -120,7 +140,7 @@ func resolve_ground(delta):
 		set_translation(hit.position + get_global_transform().basis.y * HEIGHT_ABOVE_GROUND)
 		set_as_toplevel(false)
 		falling_velocity = 0
-		if (Input.is_action_pressed("bounce") && bounce == 0 && falling_velocity == 0 && drift == 0):
+		if ((Input.is_action_pressed("bounce")) && bounce == 0 && falling_velocity == 0 && drift == 0):
 			just_drift()
 	else:
 		falling_velocity += GRAVITY * delta
@@ -214,6 +234,14 @@ func update_steer(var delta):
 		steer -= delta * STEER_SPEED
 	elif (Input.is_action_pressed("steer_right")):
 		steer += delta * STEER_SPEED
+	elif touch_steer != 0 and touch_steer < steer:
+		steer -= delta * STEER_SPEED
+		if (touch_steer > steer):
+			steer = touch_steer
+	elif touch_steer != 0 and touch_steer > steer:
+		steer += delta * STEER_SPEED
+		if (touch_steer < steer):
+			steer = touch_steer
 	elif (steer < 0):
 		steer += delta * STEER_SPEED
 		if (steer > 0):
@@ -226,11 +254,7 @@ func update_steer(var delta):
 
 func update_drift(var delta):
 	if (drift == 0 && bounce > 0):
-		if (Input.is_action_pressed("steer_left")):
-			drift = -1
-		if (Input.is_action_pressed("steer_right")):
-			drift = 1
-	pass
+		just_drift()
 
 func update_speed(var delta):
 	var result = velocity.length()
@@ -276,7 +300,40 @@ func bounce():
 	just_drift()
 
 func just_drift():
-	if (Input.is_action_pressed("steer_left")):
+	if (Input.is_action_pressed("steer_left") or touch_steer < 0):
 		drift = -1
-	if (Input.is_action_pressed("steer_right")):
+	if (Input.is_action_pressed("steer_right") or touch_steer > 0):
 		drift = 1
+
+func _input(event):
+	if event is InputEventScreenTouch and event.position.y < viewport_size.y * .2:
+		if event.pressed:
+			Input.action_press("bounce")
+		else:
+			Input.action_release("bounce")
+	
+	if (event is InputEventScreenTouch or event is InputEventScreenDrag) and event.position.y >= viewport_size.y * .2:
+		if event is InputEventScreenTouch and !event.pressed:
+			touch_position = null
+		else:
+			touch_position = event.position
+#	if event is InputEventScreenTouch:
+#		print(event.position)
+#	if event is InputEventScreenDrag or event is InputEventScreenTouch:
+#		if event.position.y > viewport_size.y * .2:
+#			touch_position = event.position
+#		elif !manual_bounce:
+#			Input.action_press("bounce")
+#			manual_bounce = true
+#			print("do bounce")
+#	if event is InputEventScreenTouch and !event.pressed: #touch_position != null and 
+#		if touch_position == null or touch_position.y < (viewport_size.y * .2):
+#			print("release bounce")
+#			Input.action_release("bounce")
+#			manual_bounce = false
+#		else:
+#			print("release drive")
+#			touch_position = null
+#			timescale = 1
+#			steer = 0
+	

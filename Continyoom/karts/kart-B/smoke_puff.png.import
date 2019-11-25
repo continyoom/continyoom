@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/smoke_puff.png-6cca5aa254e0c8297403c3f25d43fea8.s3tc.stex"
 path.etc2="res://.import/smoke_puff.png-6cca5aa254e0c8297403c3f25d43fea8.etc2.stex"
+path.etc="res://.import/smoke_puff.png-6cca5aa254e0c8297403c3f25d43fea8.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://karts/kart-B/smoke_puff.png"
-dest_files=[ "res://.import/smoke_puff.png-6cca5aa254e0c8297403c3f25d43fea8.s3tc.stex", "res://.import/smoke_puff.png-6cca5aa254e0c8297403c3f25d43fea8.etc2.stex" ]
+dest_files=[ "res://.import/smoke_puff.png-6cca5aa254e0c8297403c3f25d43fea8.s3tc.stex", "res://.import/smoke_puff.png-6cca5aa254e0c8297403c3f25d43fea8.etc2.stex", "res://.import/smoke_puff.png-6cca5aa254e0c8297403c3f25d43fea8.etc.stex" ]
 
 [params]
 

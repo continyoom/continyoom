@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/rainbow2.png-6a2714572113491f1eb095087fac475d.s3tc.stex"
 path.etc2="res://.import/rainbow2.png-6a2714572113491f1eb095087fac475d.etc2.stex"
+path.etc="res://.import/rainbow2.png-6a2714572113491f1eb095087fac475d.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://ds_rainbow_road/rainbow2.png"
-dest_files=[ "res://.import/rainbow2.png-6a2714572113491f1eb095087fac475d.s3tc.stex", "res://.import/rainbow2.png-6a2714572113491f1eb095087fac475d.etc2.stex" ]
+dest_files=[ "res://.import/rainbow2.png-6a2714572113491f1eb095087fac475d.s3tc.stex", "res://.import/rainbow2.png-6a2714572113491f1eb095087fac475d.etc2.stex", "res://.import/rainbow2.png-6a2714572113491f1eb095087fac475d.etc.stex" ]
 
 [params]
 

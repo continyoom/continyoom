@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/track1-tex.png-d83dc0cc02d449c87321f2f42f71860d.s3tc.stex"
 path.etc2="res://.import/track1-tex.png-d83dc0cc02d449c87321f2f42f71860d.etc2.stex"
+path.etc="res://.import/track1-tex.png-d83dc0cc02d449c87321f2f42f71860d.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://test_tracks/old/track1-tex.png"
-dest_files=[ "res://.import/track1-tex.png-d83dc0cc02d449c87321f2f42f71860d.s3tc.stex", "res://.import/track1-tex.png-d83dc0cc02d449c87321f2f42f71860d.etc2.stex" ]
+dest_files=[ "res://.import/track1-tex.png-d83dc0cc02d449c87321f2f42f71860d.s3tc.stex", "res://.import/track1-tex.png-d83dc0cc02d449c87321f2f42f71860d.etc2.stex", "res://.import/track1-tex.png-d83dc0cc02d449c87321f2f42f71860d.etc.stex" ]
 
 [params]
 

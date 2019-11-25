@@ -19,6 +19,10 @@ config/name="Continyoom"
 run/main_scene="res://scenes/menu_scene.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/handheld/orientation="portrait"
+
 [input]
 
 pause={
@@ -61,4 +65,5 @@ slow={
 [rendering]
 
 quality/driver/driver_name="GLES2"
+vram_compression/import_etc=true
 environment/default_environment="res://default_env.tres"

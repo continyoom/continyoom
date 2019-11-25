@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/ya.png-3a0ad8a76be7aaba1f39b341995423af.s3tc.stex"
 path.etc2="res://.import/ya.png-3a0ad8a76be7aaba1f39b341995423af.etc2.stex"
+path.etc="res://.import/ya.png-3a0ad8a76be7aaba1f39b341995423af.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://tracks/new_ds_rainbow_road/ya.png"
-dest_files=[ "res://.import/ya.png-3a0ad8a76be7aaba1f39b341995423af.s3tc.stex", "res://.import/ya.png-3a0ad8a76be7aaba1f39b341995423af.etc2.stex" ]
+dest_files=[ "res://.import/ya.png-3a0ad8a76be7aaba1f39b341995423af.s3tc.stex", "res://.import/ya.png-3a0ad8a76be7aaba1f39b341995423af.etc2.stex", "res://.import/ya.png-3a0ad8a76be7aaba1f39b341995423af.etc.stex" ]
 
 [params]
 

@@ -1,7 +1,12 @@
 extends Control
 
+var view
+
+func _ready():
+	view = get_viewport_rect().size
+
 func _physics_process(delta):
-	var view = get_viewport_rect().size
+	view = get_viewport_rect().size
 	$resume.rect_position = Vector2(view.x / 2 - $resume.rect_size.x / 2, view.y / 2 - 100)
 	$menu.rect_position = Vector2(view.x / 2 - $menu.rect_size.x / 2, view.y / 2)
 	$quit.rect_position = Vector2(view.x / 2 - $quit.rect_size.x / 2, view.y / 2 + 100)
