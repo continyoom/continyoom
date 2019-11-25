@@ -1,4 +1,4 @@
-extends Particles
+extends CPUParticles
 
 var init = 6
 
