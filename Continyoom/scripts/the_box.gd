@@ -13,7 +13,7 @@ var bounce = 0
 var bounce_vel = 0
 var current_drift = 0
 
-const STEER_SPEED = 8
+const STEER_SPEED = 2000
 const DRIFT_SPEED = 3
 const BOUNCE_DOWNSCALE = 200
 
@@ -24,9 +24,9 @@ var falling_velocity = 0
 
 var timescale = KEY_TIMESCALE
 
-const MOVE_SPEED = 200
+const MOVE_SPEED = 120
 const MOVE_FRICTION = 20
-const ROTATION_SPEED = 60
+const ROTATION_SPEED = 600
 const ROTATION_FRICTION = 30
 const HEIGHT_ABOVE_GROUND = .125
 const SEARCH_LOW = .125
@@ -222,7 +222,7 @@ func update_steer(var delta):
 		steer -= delta * STEER_SPEED
 		if (steer < 0):
 			steer = 0
-	steer = clamp(steer, -1, 1)
+	steer = clamp(steer, -2, 2)
 
 func update_drift(var delta):
 	if (drift == 0 && bounce > 0):
