@@ -13,7 +13,7 @@ var bounce = 0
 var bounce_vel = 0
 var current_drift = 0
 
-const STEER_SPEED = 2000
+const STEER_SPEED = 10
 const DRIFT_SPEED = 3
 const BOUNCE_DOWNSCALE = 200
 
@@ -35,7 +35,7 @@ const GRAVITY = -20
 const REVERSE_SPEED = 1
 const SLOW_TIMESCALE = .5
 const KEY_TIMESCALE = 1
-const MAX_TIMESCALE = 2
+const MAX_TIMESCALE = 1.5
 const BOOP_DISTANCE = .375
 const BOOP_VELOCITY = 2
 
@@ -222,7 +222,7 @@ func update_steer(var delta):
 		steer -= delta * STEER_SPEED
 		if (steer < 0):
 			steer = 0
-	steer = clamp(steer, -2, 2)
+	steer = clamp(steer, -1.5, 1.5)
 
 func update_drift(var delta):
 	if (drift == 0 && bounce > 0):
