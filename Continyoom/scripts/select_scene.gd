@@ -16,3 +16,4 @@ func _physics_process(delta):
 #rainbow road
 func _on_r_road_pressed():
 	get_tree().change_scene("scenes/play_ndsrr.tscn")
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)

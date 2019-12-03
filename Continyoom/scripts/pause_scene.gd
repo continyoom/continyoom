@@ -14,8 +14,10 @@ func _process(delta):
 		#show/hide when necessary
 		if get_tree().paused:
 			self.hide()
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		if not get_tree().paused:
 			self.show()
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		
 		#switch pause state
 		get_tree().paused = not get_tree().paused
