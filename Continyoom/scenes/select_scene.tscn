@@ -28,4 +28,12 @@ margin_top = 290.38
 margin_right = 618.136
 margin_bottom = 369.38
 text = "Rainbow Road"
+
+[node name="legal_track" type="Button" parent="."]
+margin_left = 390.0
+margin_top = 400.0
+margin_right = 619.0
+margin_bottom = 479.0
+text = "Track Uno"
 [connection signal="pressed" from="r_road" to="." method="_on_r_road_pressed"]
+[connection signal="pressed" from="legal_track" to="." method="_on_legal_track_pressed"]

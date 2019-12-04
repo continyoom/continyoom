@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://test_tracks/small-track/track1.glb" type="PackedScene" id=1]
-[ext_resource path="res://test_tracks/small-track/tack1-tex.png" type="Texture" id=2]
+[ext_resource path="res://test_tracks/small-track/track1-tex.png" type="Texture" id=2]
 [ext_resource path="res://test_tracks/small-track/checkerboard.png" type="Texture" id=3]
 
 [sub_resource type="Shader" id=4]
@@ -24,6 +24,10 @@ uniform vec3 uv1_scale;
 uniform vec3 uv1_offset;
 uniform vec3 uv2_scale;
 uniform vec3 uv2_offset;
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_texture = ExtResource( 2 )
+>>>>>>> c06ab4453fae74d906cc2dd2fa45ef006b6e3f7b
 
 
 void vertex() {
