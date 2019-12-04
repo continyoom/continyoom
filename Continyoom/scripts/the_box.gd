@@ -47,14 +47,14 @@ func _ready():
 func _physics_process(delta):
 	translate(Vector3(0, -bounce / BOUNCE_DOWNSCALE, 0))
 	
-	if Input.is_key_pressed(KEY_R):
+	if Input.is_action_pressed("reset"):
 		reset()
 	
-	if Input.is_key_pressed(KEY_S):
+	if Input.is_action_pressed("reverse-time"):
 		timescale = -KEY_TIMESCALE
-	elif Input.is_key_pressed(KEY_W):
+	elif Input.is_action_pressed("accelerate_time"):
 		timescale = MAX_TIMESCALE
-	elif Input.is_key_pressed(KEY_N):
+	elif Input.is_action_pressed("slow"):
 		timescale = SLOW_TIMESCALE
 	else:
 		timescale = KEY_TIMESCALE
