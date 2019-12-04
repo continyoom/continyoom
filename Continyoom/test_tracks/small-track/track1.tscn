@@ -1,8 +1,9 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://test_tracks/small-track/track1.glb" type="PackedScene" id=1]
-[ext_resource path="res://test_tracks/small-track/tack1-tex.png" type="Texture" id=2]
+[ext_resource path="res://test_tracks/small-track/track1-tex.png" type="Texture" id=2]
 [ext_resource path="res://test_tracks/small-track/checkerboard.png" type="Texture" id=3]
+
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_texture = ExtResource( 2 )
