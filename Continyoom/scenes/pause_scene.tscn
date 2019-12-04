@@ -4,7 +4,6 @@
 [ext_resource path="res://fonts/Raleway-Regular-Legit.tres" type="DynamicFont" id=2]
 [ext_resource path="res://fonts/Raleway-Regular.tres" type="DynamicFontData" id=3]
 
-
 [sub_resource type="DynamicFont" id=1]
 size = 40
 font_data = ExtResource( 3 )

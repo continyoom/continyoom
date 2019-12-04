@@ -9,7 +9,7 @@
 [node name="root" type="Spatial"]
 
 [node name="moving_box" parent="." instance=ExtResource( 1 )]
-transform = Transform( -4.37114e-008, 0, -1, 0, 1, 0, 1, 0, -4.37114e-008, -1.57435, 0.591931, 0 )
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.57435, 0.591931, 0 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 0.160605, 0.462891, -0.871744, 0, 0.88321, 0.468978, 0.987019, -0.0753201, 0.141848, -31.82, 14.39, 1.366 )

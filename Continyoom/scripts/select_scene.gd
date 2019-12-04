@@ -18,6 +18,7 @@ func _physics_process(delta):
 func _on_r_road_pressed():
 	get_tree().change_scene("scenes/play_ndsrr.tscn")
 
-
+#legal track
 func _on_legal_track_pressed():
 	get_tree().change_scene("scenes/play_legalTrack1.tscn")
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
