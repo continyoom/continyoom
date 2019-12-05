@@ -10,6 +10,4 @@ func _physics_process(delta):
 
 #play button
 func _on_Button_pressed():
-	#get_tree().change_scene("scenes/main_scene.tscn")
-	#get_tree().change_scene("scenes/play_ndsrr.tscn")
 	get_tree().change_scene("scenes/select_scene.tscn")
