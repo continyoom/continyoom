@@ -50,13 +50,32 @@ func _physics_process(delta):
 	if Input.is_action_pressed("reset"):
 		reset()
 	
+	if !Input.get_connected_joypads().empty():
+#		print("slow code called")
+		var slowness: float
+		if(Input.get_joy_axis(0,6) > 0.05):
+			slowness = (1.0 - 2.0 * Input.get_joy_axis(0,6))
+		else:
+			slowness = 1
+		var fastness: float
+		if(Input.get_joy_axis(0,7) > 0.05):
+			fastness = (Input.get_joy_axis(0,7) + 1)
+		else:
+			fastness = 1.0
+		
+		if fastness > 1.0:
+			timescale = fastness
+#			print("gofast!", fastness)
+		else:
+#			print("goslowback!", slowness)
+			timescale = slowness
 	if Input.is_action_pressed("reverse-time"):
 		timescale = -KEY_TIMESCALE
 	elif Input.is_action_pressed("accelerate_time"):
 		timescale = MAX_TIMESCALE
 	elif Input.is_action_pressed("slow"):
 		timescale = SLOW_TIMESCALE
-	else:
+	elif Input.get_connected_joypads().empty():
 		timescale = KEY_TIMESCALE
 	
 	delta *= timescale
@@ -210,6 +229,17 @@ func update_bounce(var delta):
 		bounce = 0
 
 func update_steer(var delta):
+	if !Input.get_connected_joypads().empty() && abs(Input.get_joy_axis(0,0)) > 0.1:
+#			steer += delta * STEER_SPEED * Input.get_joy_axis(0,0)
+		steer = Input.get_joy_axis(0,0)
+		if (steer < 0):
+			steer += delta * STEER_SPEED
+			if (steer > 0):
+				steer = 0
+		elif (steer > 0):
+			steer -= delta * STEER_SPEED
+			if (steer < 0):
+				steer = 0
 	if (Input.is_action_pressed("steer_left")):
 		steer -= delta * STEER_SPEED
 	elif (Input.is_action_pressed("steer_right")):
@@ -226,6 +256,9 @@ func update_steer(var delta):
 
 func update_drift(var delta):
 	if (drift == 0 && bounce > 0):
+		if (!Input.get_connected_joypads().empty()):
+			if(abs(Input.get_joy_axis(0,0)) > 0.1):
+				drift = sign(Input.get_joy_axis(0,0))
 		if (Input.is_action_pressed("steer_left")):
 			drift = -1
 		if (Input.is_action_pressed("steer_right")):
@@ -276,6 +309,9 @@ func bounce():
 	just_drift()
 
 func just_drift():
+	if(!Input.get_connected_joypads().empty()):
+		if(abs(Input.get_joy_axis(0,0)) > 0.1):
+			drift = sign(Input.get_joy_axis(0,0))
 	if (Input.is_action_pressed("steer_left")):
 		drift = -1
 	if (Input.is_action_pressed("steer_right")):
