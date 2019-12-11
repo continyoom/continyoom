@@ -6,7 +6,7 @@ func _physics_process(delta):
 	$menu.rect_position = Vector2(view.x / 2 - $menu.rect_size.x / 2, view.y / 2)
 	$quit.rect_position = Vector2(view.x / 2 - $quit.rect_size.x / 2, view.y / 2 + 100)
 
-func _process(delta):
+func _process(delta):	
 	if Input.is_action_just_pressed("pause"):
 		#de presses action, only important when action is triggered in code
 		Input.action_release("pause")
@@ -22,18 +22,22 @@ func _process(delta):
 		#switch pause state
 		get_tree().paused = not get_tree().paused
 
+
 #signal from resume button
 func _on_resume_pressed():
 	Input.action_press("pause")
+
 
 #signal from menu button
 func _on_menu_pressed():
 	get_tree().paused = false
 	get_tree().change_scene("scenes/menu_scene.tscn")
 
+
 #signal from quit button
 func _on_quit_pressed():
 	get_tree().quit()
+
 
 func _notification(what):
 	if what == MainLoop.NOTIFICATION_WM_FOCUS_OUT and !get_tree().paused:

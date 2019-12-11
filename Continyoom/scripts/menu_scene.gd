@@ -8,6 +8,7 @@ func _physics_process(delta):
 	$wide_car.global_scale = Vector2(img_scale, img_scale)
 	$play.rect_position = Vector2(view.x / 2 - $play.rect_size.x / 2, view.y - 150)
 
+
 #play button
 func _on_Button_pressed():
 	get_tree().change_scene("scenes/select_scene.tscn")

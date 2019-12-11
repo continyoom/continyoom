@@ -1,18 +1,25 @@
 extends AudioStreamPlayer
 
-var mute
+var mute = 0
 const MUTE_SPEED = 4
 const COMPLETE_MUTE_SPEED = 4
 var complete_mute = 0
 var complete_mute_target = 0
 var manual_complete_mute = false
+var persistence = null
+var last_mute_state = null
 
 func _ready():
+	persistence = get_node('/root/persistence')
+	last_mute_state = persistence.state['sound']
+
 	yield(get_tree().create_timer(.1), "timeout")  # no clue why this works
 	mute = 0.2  # makes start slightly less punchy
 	playing = true
 
+
 func _physics_process(delta):
+	mute = 1
 	if (mute == null):
 		return
 	if (get_tree().paused == true):
@@ -31,12 +38,14 @@ func _physics_process(delta):
 		complete_mute += delta * COMPLETE_MUTE_SPEED
 		if (complete_mute > 1):
 			complete_mute = 1
-	if (Input.is_action_just_pressed("mute")):
+	if last_mute_state != persistence.state['sound']:
+		last_mute_state = persistence.state['sound']
 		manual_complete_mute = !manual_complete_mute
 	update_mute()
 	complete_mute(complete_mute)
 
 	manual_complete_mute(manual_complete_mute)
+	
 
 func update_mute():
 	var effect = AudioServer.get_bus_effect(AudioServer.get_bus_index("PauseEQ"), 0)
