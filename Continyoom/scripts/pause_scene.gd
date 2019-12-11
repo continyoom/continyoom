@@ -18,6 +18,8 @@ func _process(delta):
 		if not get_tree().paused:
 			self.show()
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			if not Input.get_connected_joypads().empty():
+				$resume.grab_focus()
 		
 		#switch pause state
 		get_tree().paused = not get_tree().paused
